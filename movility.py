@@ -94,9 +94,11 @@ df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
 # Display the plot in Streamlit
 
-alt.Chart(df_validacion).mark_bar().encode(
+altair_chart = alt.Chart(df_validacion).mark_bar().encode(
     x='estacion',
     #y='b'
 )
+
+st.altair_chart(altair_chart, use_container_width=False, theme="streamlit", key=None, on_select="ignore", selection_mode=None)
 
 st.markdown(df)
