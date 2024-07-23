@@ -91,6 +91,10 @@ df['mes'] = df['fecha'].dt.month
 df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
 df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
-st.bar_chart(data=df_validacion, *, x="estacion ", y=None, x_label=None, y_label=None, color=None, horizontal=False, width=None, height=None, use_container_width=True)
+plot_estacion = sns.countplot(data=df_validacion, x="estacion")
+plot_estacion.set_xticklabels(plot_estacion.get_xticklabels(), rotation=45,horizontalalignment='right')
+
+# Display the plot in Streamlit
+st.pyplot(plot_estacion.fig)
 
 st.markdown(df)
