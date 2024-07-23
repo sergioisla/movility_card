@@ -95,7 +95,7 @@ st.markdown(total_recargas)
 # Display the plot in Streamlit
 
 #altair_chart = alt.Chart(df_validacion).mark_bar().encode(
-    x='estacion',
+    #x='estacion',
     #y='b'
 )
 
