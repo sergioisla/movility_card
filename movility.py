@@ -95,6 +95,6 @@ plot_estacion = sns.countplot(data=df_validacion, x="estacion")
 plot_estacion.set_xticklabels(plot_estacion.get_xticklabels(), rotation=45,horizontalalignment='right')
 
 # Display the plot in Streamlit
-st.pyplot(plot_estacion.fig)
+st.pyplot(plot_estacion.get_figure())
 
 st.markdown(df)
