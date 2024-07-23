@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import seaborn as sns
 
 import streamlit as st
 import os
@@ -83,4 +84,13 @@ response = requests.post(
     json=json_data,
 )
 df = pd.DataFrame(response.json()["data"])
+df.monto = df.monto.astype(float)
+df.saldo_final = df.saldo_final.astype(float)
+df['fecha'] = pd.to_datetime(df['fecha'],dayfirst=True)
+df['mes'] = df['fecha'].dt.month
+df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
+df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
+
+st.bar_chart(data=df_validacion, *, x="estacion ", y=None, x_label=None, y_label=None, color=None, horizontal=False, width=None, height=None, use_container_width=True)
+
 st.markdown(df)
