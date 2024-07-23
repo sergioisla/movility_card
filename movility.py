@@ -53,6 +53,9 @@ st.markdown("""
 st.markdown("""
 Ingresa tu número de tarjeta de movilidad""")
 
+st.markdown("""
+Ingresa tu número de tarjeta de movilidad""")
+
 num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
 
 
