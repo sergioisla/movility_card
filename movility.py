@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-import seaborn as sns
+import altair as alt
 
 import streamlit as st
 import os
@@ -91,10 +91,12 @@ df['mes'] = df['fecha'].dt.month
 df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
 df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
-plot_estacion = sns.countplot(data=df_validacion, x="estacion")
-plot_estacion.set_xticklabels(plot_estacion.get_xticklabels(), rotation=45,horizontalalignment='right')
 
 # Display the plot in Streamlit
-st.pyplot(plot_estacion.get_figure())
+
+alt.Chart(df_validacion).mark_bar().encode(
+    x='estacion',
+    #y='b'
+)
 
 st.markdown(df)
