@@ -45,11 +45,6 @@ with col2:
     To be transparent from the beginning, you can find the data for our project publicly available [here](https://datos.cdmx.gob.mx/dataset/victimas-en-carpetas-de-investigacion-fgj#:~:text=Descargar-,V%C3%ADctimas%20en%20Carpetas%20de%20Investigaci%C3%B3n%20(completa),-CSV)
     """)
 
-st.markdown("""
-<center>
- <iframe width="640" height="370" src="https://www.youtube.com/embed/2zavTsqaAiw" title="CDMX, la ciudad más vibrante de América Latina" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</center>
-""", unsafe_allow_html=True)
 
 st.markdown("""
 Ingresa tu número de tarjeta de movilidad""")
@@ -91,7 +86,7 @@ df['mes'] = df['fecha'].dt.month
 df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
 df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
-
+st.markdown(df)
 # Display the plot in Streamlit
 
 altair_chart = alt.Chart(df_validacion).mark_bar().encode(
@@ -100,5 +95,3 @@ altair_chart = alt.Chart(df_validacion).mark_bar().encode(
 )
 
 st.altair_chart(altair_chart, use_container_width=False, theme="streamlit", key=None, on_select="ignore", selection_mode=None)
-
-st.markdown(df)
