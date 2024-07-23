@@ -86,12 +86,17 @@ df['mes'] = df['fecha'].dt.month
 df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
 df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
-st.markdown(df)
+total_recargas = df_recarga['monto'].sum()
+
+st.markdown("""
+Total de recargas en el año:""")
+
+st.markdown(total_recargas)
 # Display the plot in Streamlit
 
-altair_chart = alt.Chart(df_validacion).mark_bar().encode(
+#altair_chart = alt.Chart(df_validacion).mark_bar().encode(
     x='estacion',
     #y='b'
 )
 
-st.altair_chart(altair_chart, use_container_width=False, theme="streamlit", key=None, on_select="ignore", selection_mode=None)
+#st.altair_chart(altair_chart, use_container_width=False, theme="streamlit", key=None, on_select="ignore", selection_mode=None)
