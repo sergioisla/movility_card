@@ -97,6 +97,6 @@ st.markdown(total_recargas)
 #altair_chart = alt.Chart(df_validacion).mark_bar().encode(
     #x='estacion',
     #y='b'
-)
+    #)
 
 #st.altair_chart(altair_chart, use_container_width=False, theme="streamlit", key=None, on_select="ignore", selection_mode=None)
