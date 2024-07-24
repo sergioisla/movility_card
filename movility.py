@@ -98,9 +98,9 @@ st.markdown("""
 Total de viajes en el año por estación:""")
 altair_chart = alt.Chart(count_stns).mark_bar().encode(
     x='viajes:Q',
-    y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12))
+    y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=6))
     ).properties(
-    width=600,
+    width=900,
     height=400
 )
 
