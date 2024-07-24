@@ -102,9 +102,9 @@ altair_chart = alt.Chart(count_stns).mark_bar().encode(
     y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
 
     ).properties(
-    width=400,
+    width=500,
     height=400
 )
 
 
-st.altair_chart(altair_chart, use_container_width=True)
+st.altair_chart(altair_chart)
