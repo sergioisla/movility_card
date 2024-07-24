@@ -33,16 +33,13 @@ col1, col2 = st.columns([1,1])
 with col1:
     ## Safety Map Front
     st.markdown("""
-    Despite """)
+    columna1 """)
 
 with col2:
     st.markdown("""
-    Our data )
+    columna2 )
     """)
 
-
-st.markdown("""
-Ingresa tu número de tarjeta de movilidad""")
 
 st.markdown("""
 Ingresa tu número de tarjeta de movilidad""")
@@ -86,11 +83,15 @@ count_stns.reset_index(inplace=True)
 count_stns.columns = ['estación', 'viajes']
 
 total_recargas = df_recarga['monto'].sum()
-
+total_validacion = df_validacion['monto'].sum()
 st.markdown("""
 Total de recargas en el año en pesos:""")
-
 st.markdown(total_recargas)
+
+st.markdown("""
+Total gastado en el año en pesos:""")
+st.markdown(total_validacion)
+
 # Display the plot in Streamlit
 
 
