@@ -44,8 +44,7 @@ st.markdown("""
 Selecciona un año:""")
 checkbox_values = {'Year': [2020, 2021, 2022, 2023, 2024],}
 selected_values = {}
-for checkbox_label, checkbox_options in checkbox_values.items():
-        selected_values[checkbox_label] = st.multiselect(checkbox_label, checkbox_options)
+
 
 
 year = selected_values['Year']
