@@ -49,7 +49,7 @@ num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
 st.markdown("""
 Ingresa un año del 2020 al 2024""")
 
-anio = st.text_input("Número de tarjeta de movilidad", max_chars=)
+anio = st.text_input("Número de tarjeta de movilidad", max_chars=4)
 
 
 cookies = {
