@@ -63,7 +63,7 @@ headers = {
 
 json_data = {
     'serie': num_tarj,
-    'anio': year,
+    'anio': '2024',
     'operacion': 'todas',
 }
 
