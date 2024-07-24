@@ -102,18 +102,9 @@ altair_chart = alt.Chart(count_stns).mark_bar().encode(
     y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
 
     ).properties(
-    width=600,
+    width=400,
     height=400
 )
 
-# Create an HTML string for centering the chart
-html_string = f"""
-<div style="display: flex; justify-content: center;">
-    {altair_chart.to_html()}
-</div>
-"""
-
-# Display the chart in Streamlit using components.html
-st.components.v1.html(html_string, height=500)
 
 st.altair_chart(altair_chart, use_container_width=True)
