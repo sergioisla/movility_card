@@ -97,11 +97,11 @@ else:
     total_recargas = df_recarga['monto'].sum()
     total_validacion = df_validacion['monto'].sum()
     st.markdown("""
-    Total de recargas en el año 2024 en pesos:""")
+    Total de recargas en el año {anio} en pesos:""")
     st.markdown(total_recargas)
 
     st.markdown("""
-    Total gastado en el año 2024 en pesos:""")
+    Total gastado en el año {anio} en pesos:""")
     st.markdown(total_validacion)
 
     # Display the plot in Streamlit
