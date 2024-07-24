@@ -88,14 +88,17 @@ count_stns.columns = ['estación', 'viajes']
 total_recargas = df_recarga['monto'].sum()
 
 st.markdown("""
-Total de recargas en el año:""")
+Total de recargas en el año en pesos:""")
 
 st.markdown(total_recargas)
 # Display the plot in Streamlit
 
+
+st.markdown("""
+Total de viajes en el año por estación:""")
 altair_chart = alt.Chart(count_stns).mark_bar().encode(
-    x='viajes',
-    y='estación'
+    x='viajes:Q',
+    y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12))
     ).properties(
     width=600,
     height=400
