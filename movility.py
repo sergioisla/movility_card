@@ -49,7 +49,7 @@ num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
 st.markdown("""
 Ingresa un año del 2020 al 2024""")
 
-anio = st.text_input("Número de tarjeta de movilidad", max_chars=4)
+anio = st.text_input("Año", max_chars=4)
 
 
 cookies = {
@@ -74,41 +74,49 @@ response = requests.post(
     headers=headers,
     json=json_data,
 )
+
+
 df = pd.DataFrame(response.json()["data"])
-df.monto = df.monto.astype(float)
-df.saldo_final = df.saldo_final.astype(float)
-df['fecha'] = pd.to_datetime(df['fecha'],dayfirst=True)
-df['mes'] = df['fecha'].dt.month
-df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
-df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
-count_stns = pd.DataFrame(df_validacion.value_counts('estacion'))
-count_stns.reset_index(inplace=True)
-count_stns.columns = ['estación', 'viajes']
+if df.shape == (1,1):
+    st.markdown("""
+    No hay datos en el año elegido""")
+else:
 
-total_recargas = df_recarga['monto'].sum()
-total_validacion = df_validacion['monto'].sum()
-st.markdown("""
-Total de recargas en el año 2024 en pesos:""")
-st.markdown(total_recargas)
+    df.monto = df.monto.astype(float)
+    df.saldo_final = df.saldo_final.astype(float)
+    df['fecha'] = pd.to_datetime(df['fecha'],dayfirst=True)
+    df['mes'] = df['fecha'].dt.month
+    df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
+    df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
-st.markdown("""
-Total gastado en el año 2024 en pesos:""")
-st.markdown(total_validacion)
+    count_stns = pd.DataFrame(df_validacion.value_counts('estacion'))
+    count_stns.reset_index(inplace=True)
+    count_stns.columns = ['estación', 'viajes']
 
-# Display the plot in Streamlit
+    total_recargas = df_recarga['monto'].sum()
+    total_validacion = df_validacion['monto'].sum()
+    st.markdown("""
+    Total de recargas en el año 2024 en pesos:""")
+    st.markdown(total_recargas)
 
+    st.markdown("""
+    Total gastado en el año 2024 en pesos:""")
+    st.markdown(total_validacion)
 
-st.markdown("""
-Total de viajes en el año 2024 por estación:""")
-altair_chart = alt.Chart(count_stns).mark_bar().encode(
-    x='viajes:Q',
-    y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
-
-    ).properties(
-    width=600,
-    height=400
-)
+    # Display the plot in Streamlit
 
 
-st.altair_chart(altair_chart)
+    st.markdown("""
+    Total de viajes en el año 2024 por estación:""")
+    altair_chart = alt.Chart(count_stns).mark_bar().encode(
+        x='viajes:Q',
+        y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
+
+        ).properties(
+        width=600,
+        height=400
+    )
+
+
+    st.altair_chart(altair_chart)
