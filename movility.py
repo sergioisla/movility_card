@@ -40,14 +40,7 @@ with col2:
     columna2 )
     """)
 
-st.markdown("""
-Selecciona un año:""")
-checkbox_values = {'Year': [2020, 2021, 2022, 2023, 2024],}
-selected_values = {}
 
-
-
-year = selected_values['Year']
 
 st.markdown("""
 Ingresa tu número de tarjeta de movilidad""")
