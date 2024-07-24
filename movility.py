@@ -83,7 +83,7 @@ df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
 count_stns = pd.DataFrame(df_validacion.value_counts('estacion'))
 count_stns.reset_index(inplace=True)
-count_stns.columns = ['estacion', 'viajes']
+count_stns.columns = ['estación', 'viajes']
 
 total_recargas = df_recarga['monto'].sum()
 
@@ -95,7 +95,10 @@ st.markdown(total_recargas)
 
 altair_chart = alt.Chart(count_stns).mark_bar().encode(
     x='viajes',
-    y='estacion'
-    )
+    y='estación'
+    ).properties(
+    width=600,
+    height=400
+)
 
 st.altair_chart(altair_chart)
