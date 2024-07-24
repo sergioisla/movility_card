@@ -43,13 +43,13 @@ with col2:
 
 
 st.markdown("""
-Ingresa tu número de tarjeta de movilidad""")
-num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
+""")
+num_tarj = st.text_input("Ingresa los 8 últimos dígitos de tu tarjeta de movilidad", max_chars=8)
 st.markdown(""" \n """)
 st.markdown("""
-Ingresa un año del 2020 al 2024""")
+""")
 
-anio = st.text_input("Año", max_chars=4)
+anio = st.text_input("Ingresa un año del 2020 al 2024", max_chars=4)
 
 
 cookies = {
