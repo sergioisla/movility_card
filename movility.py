@@ -44,12 +44,12 @@ with col2:
 
 st.markdown("""
 """)
-num_tarj = st.text_input("Ingresa los 8 últimos dígitos de tu tarjeta de movilidad", max_chars=8)
-st.markdown(""" \n """)
+num_tarj = st.text_input("Ingresa los 8 últimos dígitos de tu tarjeta de movilidad:", max_chars=8)
+
 st.markdown("""
 """)
 
-anio = st.text_input("Ingresa un año del 2020 al 2024", max_chars=4)
+anio = st.text_input("Ingresa un año del 2020 al 2024:", max_chars=4)
 
 
 cookies = {
@@ -92,26 +92,23 @@ else:
 
     count_stns = pd.DataFrame(df_validacion.value_counts('estacion'))
     count_stns.reset_index(inplace=True)
-    count_stns.columns = ['estación', 'viajes']
+    count_stns.columns = ['Estación', 'Viajes']
 
     total_recargas = df_recarga['monto'].sum()
     total_validacion = df_validacion['monto'].sum()
-    st.markdown("""
-    Total de recargas en pesos durante el año seleccionado:""")
-    st.markdown(total_recargas)
 
-    st.markdown("""
-    Total gastado en pesos durante el año seleccionado:""")
-    st.markdown(total_validacion)
+    st.markdown(""" \n """)
+
+    st.markdown(f"##### Total de recargas durante {anio}: &nbsp;&nbsp;  ${total_recargas}")
+    st.markdown(f"##### Total gastado durante {anio}:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${total_validacion}")
+    st.markdown(""" \n """)
+    st.markdown(""" \n """)
 
     # Display the plot in Streamlit
-
-
-    st.markdown("""
-    Total de viajes por estación durante el año seleccionado:""")
+    st.markdown(f"##### Total de viajes por estación durante {anio}:")
     altair_chart = alt.Chart(count_stns).mark_bar().encode(
-        x='viajes:Q',
-        y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
+        x='Viajes:Q',
+        y=alt.Y('Estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
 
         ).properties(
         width=600,
