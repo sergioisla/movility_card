@@ -101,7 +101,7 @@ altair_chart = alt.Chart(count_stns).mark_bar().encode(
     x='viajes:Q',
     y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30))
     ).properties(
-    width=600,
+    width=800,
     height=400
 )
 
@@ -115,4 +115,4 @@ html_string = f"""
 # Display the chart in Streamlit using components.html
 st.components.v1.html(html_string, height=500)
 
-st.altair_chart(altair_chart)
+st.altair_chart(altair_chart, use_container_width=True)
