@@ -46,6 +46,13 @@ Ingresa tu número de tarjeta de movilidad""")
 
 num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
 
+checkbox_values = {'Year': [2020, 2021, 2022, 2023, 2024],}
+selected_values = {}
+for checkbox_label, checkbox_options in checkbox_values.items():
+        selected_values[checkbox_label] = st.multiselect(checkbox_label, checkbox_options)
+
+
+year = selected_values['Year']
 
 
 cookies = {
@@ -61,7 +68,7 @@ headers = {
 
 json_data = {
     'serie': num_tarj,
-    'anio': '2024',
+    'anio': year,
     'operacion': 'todas',
 }
 
@@ -85,24 +92,24 @@ count_stns.columns = ['estación', 'viajes']
 total_recargas = df_recarga['monto'].sum()
 total_validacion = df_validacion['monto'].sum()
 st.markdown("""
-Total de recargas en el año en pesos:""")
+Total de recargas en el año 2024 en pesos:""")
 st.markdown(total_recargas)
 
 st.markdown("""
-Total gastado en el año en pesos:""")
+Total gastado en el año 2024 en pesos:""")
 st.markdown(total_validacion)
 
 # Display the plot in Streamlit
 
 
 st.markdown("""
-Total de viajes en el año por estación:""")
+Total de viajes en el año 2024 por estación:""")
 altair_chart = alt.Chart(count_stns).mark_bar().encode(
     x='viajes:Q',
     y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
 
     ).properties(
-    width=500,
+    width=600,
     height=400
 )
 
