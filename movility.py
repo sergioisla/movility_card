@@ -83,7 +83,7 @@ df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
 count_stns = pd.DataFrame(df_validacion.value_counts('estacion'))
 count_stns.reset_index(inplace=True)
-count_stns.columns = ['estacion', 'counts']
+count_stns.columns = ['estacion', 'viajes']
 
 total_recargas = df_recarga['monto'].sum()
 
@@ -94,8 +94,8 @@ st.markdown(total_recargas)
 # Display the plot in Streamlit
 
 altair_chart = alt.Chart(count_stns).mark_bar().encode(
-    x='estacion',
-    y='counts'
+    x='viajes',
+    y='estacion'
     )
 
 st.altair_chart(altair_chart)
