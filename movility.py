@@ -44,10 +44,12 @@ with col2:
 
 st.markdown("""
 Ingresa tu número de tarjeta de movilidad""")
-
 num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
 
+st.markdown("""
+Ingresa un año del 2020 al 2024""")
 
+anio = st.text_input("Número de tarjeta de movilidad", max_chars=)
 
 
 cookies = {
@@ -63,7 +65,7 @@ headers = {
 
 json_data = {
     'serie': num_tarj,
-    'anio': '2024',
+    'anio': anio,
     'operacion': 'todas',
 }
 
