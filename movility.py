@@ -40,12 +40,8 @@ with col2:
     columna2 )
     """)
 
-
 st.markdown("""
-Ingresa tu número de tarjeta de movilidad""")
-
-num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
-
+Selecciona un año:""")
 checkbox_values = {'Year': [2020, 2021, 2022, 2023, 2024],}
 selected_values = {}
 for checkbox_label, checkbox_options in checkbox_values.items():
@@ -53,6 +49,13 @@ for checkbox_label, checkbox_options in checkbox_values.items():
 
 
 year = selected_values['Year']
+
+st.markdown("""
+Ingresa tu número de tarjeta de movilidad""")
+
+num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
+
+
 
 
 cookies = {
