@@ -25,19 +25,19 @@ st.markdown(margins_css, unsafe_allow_html=True)
 
 #Title
 st.markdown("""
-    ## 🇲🇽 Mexico City
-    ### Do Become a Statistic""")
+    ##
+    ### Aquí puedes revisar la información de tu tarjeta de movilidad por año""")
 
 col1, col2 = st.columns([1,1])
 
 with col1:
     ## Safety Map Front
     st.markdown("""
-    columna1 """)
+     """)
 
 with col2:
     st.markdown("""
-    columna2 )
+
     """)
 
 
@@ -45,7 +45,7 @@ with col2:
 st.markdown("""
 Ingresa tu número de tarjeta de movilidad""")
 num_tarj = st.text_input("Número de tarjeta de movilidad", max_chars=8)
-
+st.markdown(""" \n """)
 st.markdown("""
 Ingresa un año del 2020 al 2024""")
 
@@ -97,18 +97,18 @@ else:
     total_recargas = df_recarga['monto'].sum()
     total_validacion = df_validacion['monto'].sum()
     st.markdown("""
-    Total de recargas en el año {anio} en pesos:""")
+    Total de recargas en pesos durante el año seleccionado:""")
     st.markdown(total_recargas)
 
     st.markdown("""
-    Total gastado en el año {anio} en pesos:""")
+    Total gastado en pesos durante el año seleccionado:""")
     st.markdown(total_validacion)
 
     # Display the plot in Streamlit
 
 
     st.markdown("""
-    Total de viajes en el año 2024 por estación:""")
+    Total de viajes por estación durante el año seleccionado:""")
     altair_chart = alt.Chart(count_stns).mark_bar().encode(
         x='viajes:Q',
         y=alt.Y('estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
