@@ -111,10 +111,10 @@ else:
     count_mes['Mes'] = count_mes['Mes'].apply(lambda x: look_up[x])
 
     #Sum of money added to the card
-    total_recargas = df_recarga['monto'].sum()
+    total_recargas = int(df_recarga['monto'].sum())
 
     #Sum of money spent by the card
-    total_validacion = df_validacion['monto'].sum()
+    total_validacion = int(df_validacion['monto'].sum())
 
     st.markdown(""" \n """)
 
