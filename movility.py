@@ -28,19 +28,6 @@ st.markdown("""
     ##
     ### Aquí puedes revisar la información de tu tarjeta de movilidad por año""")
 
-col1, col2 = st.columns([1,1])
-
-with col1:
-    ## Safety Map Front
-    st.markdown("""
-     """)
-
-with col2:
-    st.markdown("""
-
-    """)
-
-
 
 st.markdown("""
 """)
@@ -94,6 +81,15 @@ else:
     count_stns.reset_index(inplace=True)
     count_stns.columns = ['Estación', 'Viajes']
 
+    count_mes = pd.DataFrame(df_validacion.value_counts('mes'))
+    count_mes.reset_index(inplace=True)
+    count_mes.columns = ['Mes', 'Viajes']
+    count_mes.sort_values('Mes',inplace=True)
+    count_mes['Mes'] = pd.to_datetime(count_mes['Mes'], format='%m').dt.strftime('%b')
+    look_up = {'Jan': '01-Enero', 'Feb': '02-Febrero', 'Mar': '03-Marzo', 'Apr': '04-Abril', 'May': '05-Mayo',
+            'Jun': '06-Junio', 'Jul': '07-Julio', 'Aug': '08-Agosto', 'Sep': '09-Septiembre', 'Oct': '10-Octubre', 'Nov': '11-Noviembre', 'Dec': '12-Diciembre'}
+    count_mes['Mes'] = count_mes['Mes'].apply(lambda x: look_up[x])
+
     total_recargas = df_recarga['monto'].sum()
     total_validacion = df_validacion['monto'].sum()
 
@@ -106,14 +102,22 @@ else:
 
     # Display the plot in Streamlit
     st.markdown(f"##### Total de viajes por estación durante {anio}:")
-    altair_chart = alt.Chart(count_stns).mark_bar().encode(
+    altair_chart_stns = alt.Chart(count_stns).mark_bar().encode(
         x='Viajes:Q',
         y=alt.Y('Estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
-
         ).properties(
         width=600,
         height=400
     )
+    st.altair_chart(altair_chart_stns)
 
-
-    st.altair_chart(altair_chart)
+    st.markdown(f"##### Total de viajes por mes durante {anio}:")
+    altair_chart_mes = alt.Chart(count_mes).mark_bar().encode(
+        x='Mes',
+        y='Viajes'
+        ).properties(
+        width=600,
+        height=400
+    )
+    st.altair_chart(altair_chart_mes)
+    #st.markdown(count_mes)
