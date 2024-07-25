@@ -26,7 +26,8 @@ st.markdown(margins_css, unsafe_allow_html=True)
 #Title
 st.markdown("""
     ##
-    ### Aquí puedes ver un resumen de la información de tu tarjeta de movilidad de la CDMX por año""")
+    ### Tarjeta de movilidad de la CDMX
+    #### Aquí puedes ver un resumen de tus viajes por año""")
 #Option to write something in a pair of columns
 col1, col2 = st.columns([1,1])
 
