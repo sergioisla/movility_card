@@ -28,6 +28,19 @@ st.markdown("""
     ##
     ### Aquí puedes revisar la información de tu tarjeta de movilidad por año""")
 
+col1, col2 = st.columns([1,1])
+
+with col1:
+    ## Safety Map Front
+    st.markdown("""
+     """)
+
+with col2:
+    st.markdown("""
+
+    """)
+
+
 
 st.markdown("""
 """)
@@ -101,12 +114,13 @@ else:
     st.markdown(""" \n """)
 
     # Display the plot in Streamlit
+
     st.markdown(f"##### Total de viajes por estación durante {anio}:")
     altair_chart_stns = alt.Chart(count_stns).mark_bar().encode(
         x='Viajes:Q',
         y=alt.Y('Estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
         ).properties(
-        width=600,
+        width=400,
         height=400
     )
     st.altair_chart(altair_chart_stns)
@@ -116,7 +130,7 @@ else:
         x='Mes',
         y='Viajes'
         ).properties(
-        width=600,
+        width=400,
         height=400
     )
     st.altair_chart(altair_chart_mes)
