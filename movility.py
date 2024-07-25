@@ -6,7 +6,7 @@ import streamlit as st
 import os
 from PIL import Image
 
-#API_HOST = os.getenv("API_HOST")
+
 
 # Setting the wide config for the page
 st.set_page_config(layout="wide")
@@ -27,7 +27,7 @@ st.markdown(margins_css, unsafe_allow_html=True)
 st.markdown("""
     ##
     ### Aquí puedes revisar la información de tu tarjeta de movilidad por año""")
-
+#Option to write something in a pair of columns
 col1, col2 = st.columns([1,1])
 
 with col1:
@@ -41,17 +41,17 @@ with col2:
     """)
 
 
-
+#Card number input
 st.markdown("""
 """)
 num_tarj = st.text_input("Ingresa los 8 últimos dígitos de tu tarjeta de movilidad:", max_chars=8)
 
+#Year input
 st.markdown("""
 """)
-
 anio = st.text_input("Ingresa un año del 2020 al 2024:", max_chars=4)
 
-
+#Retrieve data from the official website
 cookies = {
 }
 
@@ -75,25 +75,31 @@ response = requests.post(
     json=json_data,
 )
 
-
 df = pd.DataFrame(response.json()["data"])
 
+#In case there is no data
 if df.shape == (1,1):
     st.markdown("""
     No hay datos en el año elegido""")
 else:
-
+    #Some columns transformation
     df.monto = df.monto.astype(float)
     df.saldo_final = df.saldo_final.astype(float)
     df['fecha'] = pd.to_datetime(df['fecha'],dayfirst=True)
     df['mes'] = df['fecha'].dt.month
+
+    #Filtering data about money added to the card
     df_recarga = df.loc[df['operacion'] == "00-RECARGA"]
+
+    #Filtering data about money spent by the card
     df_validacion = df.loc[df['operacion'] == "03-VALIDACION"]
 
+    #Preparing data to be used to plot trips by station
     count_stns = pd.DataFrame(df_validacion.value_counts('estacion'))
     count_stns.reset_index(inplace=True)
     count_stns.columns = ['Estación', 'Viajes']
 
+    #Preparing data to be used to plot trips by month
     count_mes = pd.DataFrame(df_validacion.value_counts('mes'))
     count_mes.reset_index(inplace=True)
     count_mes.columns = ['Mes', 'Viajes']
@@ -103,18 +109,21 @@ else:
             'Jun': '06-Junio', 'Jul': '07-Julio', 'Aug': '08-Agosto', 'Sep': '09-Septiembre', 'Oct': '10-Octubre', 'Nov': '11-Noviembre', 'Dec': '12-Diciembre'}
     count_mes['Mes'] = count_mes['Mes'].apply(lambda x: look_up[x])
 
+    #Sum of money added to the card
     total_recargas = df_recarga['monto'].sum()
+
+    #Sum of money spent by the card
     total_validacion = df_validacion['monto'].sum()
 
     st.markdown(""" \n """)
 
+    #Display money added and spent
     st.markdown(f"##### Total de recargas durante {anio}: &nbsp;&nbsp;  ${total_recargas}")
     st.markdown(f"##### Total gastado durante {anio}:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${total_validacion}")
     st.markdown(""" \n """)
     st.markdown(""" \n """)
 
-    # Display the plot in Streamlit
-
+    # Display the plot about trips by station
     st.markdown(f"##### Total de viajes por estación durante {anio}:")
     altair_chart_stns = alt.Chart(count_stns).mark_bar().encode(
         x='Viajes:Q',
@@ -125,6 +134,7 @@ else:
     )
     st.altair_chart(altair_chart_stns)
 
+    # Display the plot about trips by month
     st.markdown(f"##### Total de viajes por mes durante {anio}:")
     altair_chart_mes = alt.Chart(count_mes).mark_bar().encode(
         x='Mes',
@@ -134,4 +144,3 @@ else:
         height=400
     )
     st.altair_chart(altair_chart_mes)
-    #st.markdown(count_mes)
