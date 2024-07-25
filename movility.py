@@ -121,7 +121,7 @@ else:
         y=alt.Y('Estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
         ).properties(
         width=300,
-        height=400
+        height=500
     )
     st.altair_chart(altair_chart_stns)
 
