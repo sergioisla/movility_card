@@ -120,7 +120,7 @@ else:
         x='Viajes:Q',
         y=alt.Y('Estación:N', sort='-x', axis=alt.Axis(labelFontSize=12, labelPadding=30,labelLimit=200))
         ).properties(
-        width=400,
+        width=350,
         height=400
     )
     st.altair_chart(altair_chart_stns)
@@ -130,7 +130,7 @@ else:
         x='Mes',
         y='Viajes'
         ).properties(
-        width=400,
+        width=300,
         height=400
     )
     st.altair_chart(altair_chart_mes)
