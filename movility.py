@@ -145,3 +145,24 @@ else:
         height=400
     )
     st.altair_chart(altair_chart_mes)
+
+    # Sum of money spent by month
+    gasto_mes = pd.DataFrame(df_validacion.groupby('mes')['monto'].sum())
+    gasto_mes.reset_index(inplace=True)
+    gasto_mes.columns = ['Mes', 'Gasto']
+    gasto_mes.sort_values('Mes',inplace=True)
+    gasto_mes['Mes'] = pd.to_datetime(gasto_mes['Mes'], format='%m').dt.strftime('%b')
+    look_up = {'Jan': '01-Enero', 'Feb': '02-Febrero', 'Mar': '03-Marzo', 'Apr': '04-Abril', 'May': '05-Mayo',
+            'Jun': '06-Junio', 'Jul': '07-Julio', 'Aug': '08-Agosto', 'Sep': '09-Septiembre', 'Oct': '10-Octubre', 'Nov': '11-Noviembre', 'Dec': '12-Diciembre'}
+    gasto_mes['Mes'] = gasto_mes['Mes'].apply(lambda x: look_up[x])
+
+    # Display the plot about money spent by month
+    st.markdown(f"##### Total gastado por mes durante {anio}:")
+    altair_gasto_mes = alt.Chart(gasto_mes).mark_bar().encode(
+        x='Mes',
+        y='Gasto'
+        ).properties(
+        width=300,
+        height=400
+    )
+    st.altair_chart(altair_gasto_mes)
